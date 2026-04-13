@@ -13,7 +13,7 @@
 {
   manifest_version: "0.1.0",
   program: {
-    image: "ghcr.io/<YOUR_GHCR_USER>/purple-agent-officeqa:latest",
+    image: "ghcr.io/ab-shetty/mids-officeqa-alpha@sha256:c90d1e2644537d811095dc98f0654177fcbc6216f3603d1e6b162241ce45077c",
     entrypoint: [
       "python",
       "-m",
