@@ -1,0 +1,17 @@
+.git
+.github
+.gitignore
+__pycache__
+*.pyc
+.venv
+cache/
+tests/
+*.log
+.env
+.env.*
+.mypy_cache
+.pytest_cache
+.*.sw[a-p]
+.DS_Store
+SUBMISSION.md
+submission-template.json

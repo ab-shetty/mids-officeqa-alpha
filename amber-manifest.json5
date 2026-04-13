@@ -1,0 +1,55 @@
+// Amber manifest for the purple agent.
+//
+// Submitters reference this file from a submissions/<uuid>.json entry in
+// their fork of RDI-Foundation/officeqa-agentbeats-leaderboard.
+//
+// Replace <YOUR_GHCR_USER> with the GHCR user/org that hosts the image
+// you build from this repo (the image must be pullable from GHCR by the
+// quick-submit GitHub Actions workflow).
+//
+// Pin to an immutable digest at submission time:
+//   ghcr.io/<YOUR_GHCR_USER>/purple-agent-officeqa@sha256:<DIGEST>
+// The Kimi submission in the leaderboard uses this pattern.
+{
+  manifest_version: "0.1.0",
+  program: {
+    image: "ghcr.io/<YOUR_GHCR_USER>/purple-agent-officeqa:latest",
+    entrypoint: [
+      "python",
+      "-m",
+      "src.server",
+      "--host", "0.0.0.0",
+      "--port", "8080",
+    ],
+    env: {
+      OPENAI_API_KEY: "${config.openai_api_key}",
+      // Default to gpt-5.4-mini — measured +5pp accuracy and 30% faster
+      // latency vs gpt-5-mini on a 20-question mixed sample at a ~2.8×
+      // token cost (~$9 vs ~$3 for the full 246-question benchmark).
+      OPENAI_MODEL: "${config.openai_model}",
+      REASONING_EFFORT: "${config.reasoning_effort}",
+      LOG_LEVEL: "INFO",
+    },
+    network: {
+      endpoints: [
+        { name: "endpoint", port: 8080 },
+      ],
+    },
+  },
+  config_schema: {
+    type: "object",
+    properties: {
+      openai_api_key:   { type: "string", secret: true },
+      openai_model:     { type: "string" },
+      reasoning_effort: { type: "string" },
+    },
+    required: ["openai_api_key"],
+    additionalProperties: false,
+  },
+  provides: {
+    a2a: { kind: "a2a", endpoint: "endpoint" },
+  },
+  exports: {
+    a2a: "a2a",
+  },
+}
