@@ -71,7 +71,3 @@ and reuses them afterwards.
 docker build -t ghcr.io/<YOUR_GHCR_USER>/purple-agent-officeqa:v1 .
 docker push ghcr.io/<YOUR_GHCR_USER>/purple-agent-officeqa:v1
 ```
-
-## Submitting to the leaderboard
-
-See `SUBMISSION.md` for the full step-by-step.
