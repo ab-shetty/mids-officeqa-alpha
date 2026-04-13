@@ -26,8 +26,8 @@
       // Default to gpt-5.4-mini — measured +5pp accuracy and 30% faster
       // latency vs gpt-5-mini on a 20-question mixed sample at a ~2.8×
       // token cost (~$9 vs ~$3 for the full 246-question benchmark).
-      OPENAI_MODEL: "${config.openai_model}",
-      REASONING_EFFORT: "${config.reasoning_effort}",
+      OPENAI_MODEL: { when: "config.openai_model", value: "${config.openai_model}" },
+      REASONING_EFFORT: { when: "config.reasoning_effort", value: "${config.reasoning_effort}" },
       LOG_LEVEL: "INFO",
     },
     network: {
